@@ -26,6 +26,8 @@ public class Test03 {
         map.put("湖北省", l2);
         map.put("河北省", l3);
 
+        // 更改测试，是否推送成功？
+
         // 3.遍历打印
         map.forEach(new BiConsumer<String, ArrayList<String>>() {
             @Override
