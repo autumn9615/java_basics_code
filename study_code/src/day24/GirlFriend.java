@@ -15,7 +15,7 @@ public class GirlFriend {
     // 姓名的长度在3-10之间
     public void setName(String name) {
         if(name.length()<3 || name.length()>10){
-            throw new RuntimeException();
+            throw new NameFormatException(name + "的长度在3-10之间");
         }
         this.name = name;
     }
@@ -25,7 +25,7 @@ public class GirlFriend {
     // 年龄的范围为18-40岁
     public void setAge(int age) {
         if(age<18 || age>40){
-            throw new RuntimeException();
+            throw new AgeOutOfBoundsException(age + "的范围为18-40岁");
         }
         this.age = age;
     }

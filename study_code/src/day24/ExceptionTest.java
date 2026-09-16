@@ -33,9 +33,11 @@ public class ExceptionTest {
                 gf.setAge(Integer.parseInt(age));
                 break;
             } catch (NumberFormatException e) {
-                System.out.println("年龄的格式有误！请输入数字!");
-            } catch (RuntimeException e) {
-                System.out.println("姓名长度或年龄范围有误！请重新输入！");
+                e.printStackTrace();
+            } catch (NameFormatException e) {
+                e.printStackTrace();
+            }catch (AgeOutOfBoundsException e) {
+                e.printStackTrace();
             }
         }
         System.out.println(gf.toString());
