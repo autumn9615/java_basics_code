@@ -20,7 +20,7 @@ public class IOStreamTest01 {
 
         //1.把文件里每一行读出来，装进集合
         ArrayList<String> list = new ArrayList<>();
-        BufferedReader br = new BufferedReader(new FileReader("study_code/src/day28/name01.txt"));
+        BufferedReader br = new BufferedReader(new FileReader("study_code/src/day28/name.txt"));
 
         String line;
         while ((line = br.readLine()) != null) {
