@@ -3,7 +3,7 @@ package day29;
 public class MultithreadingTest01 {
     public static void main(String[] args) {
 //        多线程练习1（卖电影票）（学生自己练习）
-//        一共有1000张电影票，可以在两个窗口领取，假设每次领取的时间为3000毫秒，
+//        一共有100张电影票，可以在两个窗口领取，假设每次领取的时间为3000毫秒，
 //        要求：请用多线程模拟卖票过程并打印剩余电影票的数量
 
 
@@ -30,16 +30,17 @@ public class MultithreadingTest01 {
                 // 进来的只有一个，锁来把关
                 synchronized (lock){
                     if(ticket < 100) {
-                        try {
-                            Thread.sleep(10);
-                        } catch (InterruptedException e) {
-                            throw new RuntimeException(e);
-                        }
                         ticket++;
                         System.out.println(getName() + "正在卖第" + ticket + "张票！！");
-                    }else{
-                        break;
                     }
+                }if(ticket >= 100){
+                    System.out.println("票已售空！！！");
+                    break;
+                }
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
                 }
             }
         }
