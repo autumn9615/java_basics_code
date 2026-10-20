@@ -1,10 +1,7 @@
 package day30;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class StudentService{
     // 创建ArrayList结合来当数据库存学生信息
@@ -28,10 +25,7 @@ public class StudentService{
     * - 要求用 Comparator + Lambda（不许让 Student 实现 Comparable）
     * */
     public void printSortedByScore(){
-        System.out.println("按照成绩从高到低为：");
-        for (Student s : students) {
-            students.sort(Comparator.comparing(student -> s.getScore()));
-        }
+        students.sort(Comparator.comparing(Student::getScore).reversed());
     }
     /*
     * 按学号查找学生并打印其信息
@@ -39,10 +33,10 @@ public class StudentService{
     * 在 main 里 try-catch 捕获，打印友好提示
     * */
     public void findById(String id) throws StudentNotFoundException{
-        try {
-            students.stream().filter(s -> s.getId().equals(id)).forEach(s -> System.out.println(s.toString()));
-        }catch (Exception e){
-            throw new StudentNotFoundException();
+        for (Student s : students) {
+            if(s.getId().equals(id)){
+                System.out.println(s.toString());
+            }
         }
     }
     /*
@@ -62,13 +56,17 @@ public class StudentService{
         Map<String,Integer> map = new HashMap<>();
         for (int i = 0; i < students.size(); i++) {
             if(students.get(i).getScore() >= 90){
-                map.put("优秀",valueA++);
+                valueA++;
+                map.put("优秀",valueA);
             }else if(students.get(i).getScore() >= 80 && students.get(i).getScore() <= 89){
-                map.put("良好",valueB++);
+                valueB++;
+                map.put("良好",valueB);
             }else if(students.get(i).getScore() >= 60 && students.get(i).getScore() <= 79){
-                map.put("中等",valueC++);
+                valueC++;
+                map.put("中等",valueC);
             }else if(students.get(i).getScore() < 60){
-                map.put("不及格",valueD++);
+                valueD++;
+                map.put("不及格",valueD);
             }
         }
         return map;
@@ -80,6 +78,19 @@ public class StudentService{
     *  - 不许用 Date / SimpleDateFormat
     *  */
     public int calcAge(Student s){
-        return LocalDate.parse(s.getBirthday()).getYear();
+        if((LocalDate.parse(s.getBirthday()).getYear() % 400 == 0)
+        || (LocalDate.parse(s.getBirthday()).getYear() % 4 == 0 && LocalDate.parse(s.getBirthday()).getYear() % 100 != 0)){
+            if(LocalDate.parse(s.getBirthday()).getDayOfYear() - 1 > LocalDate.now().getDayOfYear()){
+                return LocalDate.now().getYear() - LocalDate.parse(s.getBirthday()).getYear() - 1;
+            }else{
+                return LocalDate.now().getYear() - LocalDate.parse(s.getBirthday()).getYear();
+            }
+        }else{
+            if(LocalDate.parse(s.getBirthday()).getDayOfYear() > LocalDate.now().getDayOfYear()){
+                return LocalDate.now().getYear() - LocalDate.parse(s.getBirthday()).getYear() - 1;
+            }else{
+                return LocalDate.now().getYear() - LocalDate.parse(s.getBirthday()).getYear();
+            }
+        }
     }
 }

@@ -45,6 +45,6 @@ public class Student {
     }
     @Override
     public String toString() {
-        return "姓名：" + this.getName() + "学号：" + this.getId() + "成绩：" + this.getScore() + "生日：" + this.getBirthday();
+        return "姓名：" + this.getName() + " 学号：" + this.getId() + " 成绩：" + this.getScore() + " 生日：" + this.getBirthday();
     }
 }
