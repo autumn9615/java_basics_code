@@ -32,13 +32,13 @@ public class ScoreSystemApp {
         try {
             studentService.findById("S001");
         } catch (StudentNotFoundException e) {
-            throw new RuntimeException(e.getMessage());
+            System.out.println(e.getMessage());
         }
         System.out.println("-----------------------------------------------");
         try {
             studentService.findById("S007");
         } catch (StudentNotFoundException e) {
-            throw new RuntimeException(e);
+            System.out.println(e.getMessage());
         }
 
         // 步骤 4：countByLevel() 拿到 Map，遍历打印每个等级的人数

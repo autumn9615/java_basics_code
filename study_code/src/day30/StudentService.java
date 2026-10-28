@@ -37,16 +37,13 @@ public class StudentService{
     * 在 main 里 try-catch 捕获，打印友好提示
     * */
     public void findById(String id) throws StudentNotFoundException{
-        try {
-            for (Student s : students) {
-                if(s.getId().equals(id)){
-                    System.out.println(s.toString());
-                    return;
-                }
+        for (Student s : students) {
+            if(s.getId().equals(id)){
+                System.out.println(s.toString());
+                return;
             }
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
         }
+        throw new StudentNotFoundException("学号不存在:" + id);
     }
     /*
      * 统计各分数段人数并打印：
