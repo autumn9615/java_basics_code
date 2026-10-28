@@ -1,7 +1,11 @@
 package day30;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.time.Period;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
 
 public class StudentService{
     // 创建ArrayList结合来当数据库存学生信息
@@ -33,11 +37,15 @@ public class StudentService{
     * 在 main 里 try-catch 捕获，打印友好提示
     * */
     public void findById(String id) throws StudentNotFoundException{
-        for (Student s : students) {
-            if(s.getId().equals(id)){
-                System.out.println(s.toString());
-                return;
+        try {
+            for (Student s : students) {
+                if(s.getId().equals(id)){
+                    System.out.println(s.toString());
+                    return;
+                }
             }
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
         }
     }
     /*
@@ -80,19 +88,20 @@ public class StudentService{
     *  */
     public int calcAge(Student s){
         LocalDate birthday = s.getBirthday();
-        if((birthday.getYear() % 400 == 0)
-        || (birthday.getYear() % 4 == 0 && birthday.getYear() % 100 != 0)){
-            if(birthday.getDayOfYear() - 1 > LocalDate.now().getDayOfYear()){
-                return LocalDate.now().getYear() - birthday.getYear() - 1;
-            }else{
-                return LocalDate.now().getYear() - birthday.getYear();
-            }
-        }else{
-            if(birthday.getDayOfYear() > LocalDate.now().getDayOfYear()){
-                return LocalDate.now().getYear() - birthday.getYear() - 1;
-            }else{
-                return LocalDate.now().getYear() - birthday.getYear();
-            }
-        }
+        return Period.between(birthday, LocalDate.now()).getYears();
+//        if((birthday.getYear() % 400 == 0)
+//        || (birthday.getYear() % 4 == 0 && birthday.getYear() % 100 != 0)){
+//            if(birthday.getDayOfYear() - 1 > LocalDate.now().getDayOfYear()){
+//                return LocalDate.now().getYear() - birthday.getYear() - 1;
+//            }else{
+//                return LocalDate.now().getYear() - birthday.getYear();
+//            }
+//        }else{
+//            if(birthday.getDayOfYear() > LocalDate.now().getDayOfYear()){
+//                return LocalDate.now().getYear() - birthday.getYear() - 1;
+//            }else{
+//                return LocalDate.now().getYear() - birthday.getYear();
+//            }
+//        }
     }
 }
