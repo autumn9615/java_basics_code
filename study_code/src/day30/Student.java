@@ -1,5 +1,7 @@
 package day30;
 
+import java.time.LocalDate;
+
 public class Student {
     // 定义学生类
     // 姓名
@@ -9,10 +11,10 @@ public class Student {
     // 成绩
     private double score;
     // 生日
-    private String birthday;
+    private LocalDate birthday;
     // 提供空参构造和全参构造
     public Student(){};
-    public Student(String name, String id, double score, String birthday) {
+    public Student(String name, String id, double score, LocalDate birthday) {
         this.name = name;
         this.id = id;
         this.score = score;
@@ -34,13 +36,13 @@ public class Student {
     public double getScore() {
         return score;
     }
-    public void setScore(int score) {
+    public void setScore(double score) {
         this.score = score;
     }
-    public String getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
-    public void setBirthday(String birthday) {
+    public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
     @Override

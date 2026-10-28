@@ -1,16 +1,17 @@
 package day30;
 
+import java.time.LocalDate;
 import java.util.Map;
 
 public class ScoreSystemApp {
     public static void main(String[] args){
         // 程序主入口
         // 步骤 1：new StudentService，addStudent 预置 4-5 个学生
-        Student s1 = new Student("张三","S001",95,"2005-03-15");
-        Student s2 = new Student("李四","S002",85,"2005-12-08");
-        Student s3 = new Student("王五","S003",72,"2004-10-20");
-        Student s4 = new Student("赵六","S004",58,"2005-06-01");
-        Student s5 = new Student("钱七","S005",85,"2005-11-30");
+        Student s1 = new Student("张三","S001",95, LocalDate.parse("2005-03-15"));
+        Student s2 = new Student("李四","S002",85, LocalDate.parse("2005-12-08"));
+        Student s3 = new Student("王五","S003",72, LocalDate.parse("2004-10-20"));
+        Student s4 = new Student("赵六","S004",58, LocalDate.parse("2005-06-01"));
+        Student s5 = new Student("钱七","S005",85, LocalDate.parse("2005-11-30"));
         StudentService studentService = new StudentService();
         studentService.addStudent(s1);
         studentService.addStudent(s2);
@@ -31,7 +32,7 @@ public class ScoreSystemApp {
         try {
             studentService.findById("S001");
         } catch (StudentNotFoundException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
         System.out.println("-----------------------------------------------");
         try {

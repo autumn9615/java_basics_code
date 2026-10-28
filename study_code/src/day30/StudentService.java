@@ -36,6 +36,7 @@ public class StudentService{
         for (Student s : students) {
             if(s.getId().equals(id)){
                 System.out.println(s.toString());
+                return;
             }
         }
     }
@@ -58,10 +59,10 @@ public class StudentService{
             if(students.get(i).getScore() >= 90){
                 valueA++;
                 map.put("优秀",valueA);
-            }else if(students.get(i).getScore() >= 80 && students.get(i).getScore() <= 89){
+            }else if(students.get(i).getScore() >= 80){
                 valueB++;
                 map.put("良好",valueB);
-            }else if(students.get(i).getScore() >= 60 && students.get(i).getScore() <= 79){
+            }else if(students.get(i).getScore() >= 60){
                 valueC++;
                 map.put("中等",valueC);
             }else if(students.get(i).getScore() < 60){
@@ -78,18 +79,19 @@ public class StudentService{
     *  - 不许用 Date / SimpleDateFormat
     *  */
     public int calcAge(Student s){
-        if((LocalDate.parse(s.getBirthday()).getYear() % 400 == 0)
-        || (LocalDate.parse(s.getBirthday()).getYear() % 4 == 0 && LocalDate.parse(s.getBirthday()).getYear() % 100 != 0)){
-            if(LocalDate.parse(s.getBirthday()).getDayOfYear() - 1 > LocalDate.now().getDayOfYear()){
-                return LocalDate.now().getYear() - LocalDate.parse(s.getBirthday()).getYear() - 1;
+        LocalDate birthday = s.getBirthday();
+        if((birthday.getYear() % 400 == 0)
+        || (birthday.getYear() % 4 == 0 && birthday.getYear() % 100 != 0)){
+            if(birthday.getDayOfYear() - 1 > LocalDate.now().getDayOfYear()){
+                return LocalDate.now().getYear() - birthday.getYear() - 1;
             }else{
-                return LocalDate.now().getYear() - LocalDate.parse(s.getBirthday()).getYear();
+                return LocalDate.now().getYear() - birthday.getYear();
             }
         }else{
-            if(LocalDate.parse(s.getBirthday()).getDayOfYear() > LocalDate.now().getDayOfYear()){
-                return LocalDate.now().getYear() - LocalDate.parse(s.getBirthday()).getYear() - 1;
+            if(birthday.getDayOfYear() > LocalDate.now().getDayOfYear()){
+                return LocalDate.now().getYear() - birthday.getYear() - 1;
             }else{
-                return LocalDate.now().getYear() - LocalDate.parse(s.getBirthday()).getYear();
+                return LocalDate.now().getYear() - birthday.getYear();
             }
         }
     }
